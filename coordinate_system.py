@@ -17,10 +17,11 @@ class CoordinateSystem:
 		self.generate_food()
 	def food(self,x=0,y=0,val=0):
 		self.space[x,y] += val
-		if(self.space[x,y]<0):
-			self.space[x,y]=0
 	def is_food(self,x=0,y=0):
-		return (self.space[x,y]>0)
+		if(self.space[x,y]>0):
+			return '1'
+		else:
+			return '0'
 	def generate_food(self):
 		for x in range(self.minX,self.maxX+1,1):
 			for y in range(self.minY,self.maxY+1,1):

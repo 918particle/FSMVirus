@@ -7,7 +7,7 @@ import random as r
 class FSM:
 	def __init__(self,x=0,y=0):
 		self.current_state = '00'
-		self.current_output = '01'
+		self.current_output = '1'
 		self.pos_x = x
 		self.pos_y = y
 	def act(self,input):
