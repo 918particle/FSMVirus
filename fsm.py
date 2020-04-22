@@ -5,13 +5,16 @@
 import random as r
 
 class FSM:
-	def __init__(self):
+	def __init__(self,x=0,y=0):
 		self.current_state = '00'
-		self.current_output = '1'
+		self.current_output = '01'
+		self.pos_x = x
+		self.pos_y = y
 	def act(self,input):
 		if(input == '0' and self.current_state == '00'):
 			self.current_state = '11'
 			self.current_output = '1'
+			self.move()
 		elif (input == '1' and self.current_state == '00'):
 			self.current_state = '01'
 			self.current_output = '1'
@@ -33,19 +36,18 @@ class FSM:
 		elif (input == '1' and self.current_state == '11'):
 			self.current_state = '01'
 			self.current_output = '1'
-	def print_state(self):
-		print(self.current_state)
-	def print_output(self):
-		print(self.current_output)
+	def get_state(self):
+		return self.current_state
+	def get_output(self):
+		return self.current_output
 	def move(self):
-		if(self.current_state == '00'):
-			if(r.randint(0,1)):
-				if(r.random()>=0.5):
-					self.pos_x += 1
-				else:
-					self.pos_x -= 1
+		if(r.randint(0,1)):
+			if(r.random()>=0.5):
+				self.pos_x += 1
 			else:
-				if(r.random()>=0.5):
-					self.pos_x += 1
-				else:
-					self.pos_y -= 1
+				self.pos_x -= 1
+		else:
+			if(r.random()>=0.5):
+				self.pos_x += 1
+			else:
+				self.pos_y -= 1

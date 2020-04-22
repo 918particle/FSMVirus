@@ -1,4 +1,4 @@
-from numpy import array,arange,zeros
+from numpy import array,zeros
 from random import randint
 import constants
 
@@ -14,11 +14,11 @@ class CoordinateSystem:
 		self.minY = int(min_y)
 		self.maxY = int(max_y)
 		self.space = zeros((self.maxX-self.minX+1,self.maxY-self.minY+1))
-	def add_food_item(self,x=0,y=0,val=0):
+		self.generate_food()
+	def food(self,x=0,y=0,val=0):
 		self.space[x,y] += val
-	def sub_food_item(self,x=0,y=0,val=0):
-		if(self.space[x,y]>0):
-			self.space[x,y] -= val
+		if(self.space[x,y]<0):
+			self.space[x,y]=0
 	def is_food(self,x=0,y=0):
 		return (self.space[x,y]>0)
 	def generate_food(self):
@@ -26,5 +26,4 @@ class CoordinateSystem:
 			for y in range(self.minY,self.maxY+1,1):
 				i = x-self.minX
 				j = y-self.minY
-				self.add_food_item(i,j,randint(0,1))
-				self.sub_food_item(i,j,randint(0,1))
+				self.food(i,j,randint(-1,1))
