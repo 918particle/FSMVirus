@@ -2,8 +2,6 @@
 #Inputs: 0 - no food, 1 - food
 #Outputs: 0 - dead, 1 - alive
 
-import random as r
-
 class FSM:
 	def __init__(self,x=0,y=0):
 		self.current_state = '00'
@@ -14,7 +12,6 @@ class FSM:
 		if(input == '0' and self.current_state == '00'):
 			self.current_state = '11'
 			self.current_output = '1'
-			self.move()
 		elif (input == '1' and self.current_state == '00'):
 			self.current_state = '01'
 			self.current_output = '1'
@@ -40,14 +37,3 @@ class FSM:
 		return self.current_state
 	def get_output(self):
 		return self.current_output
-	def move(self):
-		if(r.randint(0,1)):
-			if(r.random()>=0.5):
-				self.pos_x += 1
-			else:
-				self.pos_x -= 1
-		else:
-			if(r.random()>=0.5):
-				self.pos_x += 1
-			else:
-				self.pos_y -= 1

@@ -1,5 +1,5 @@
-from numpy import array,zeros
-from random import randint
+from numpy import array,ones
+import random as r
 import constants
 
 class CoordinateSystem:
@@ -13,8 +13,32 @@ class CoordinateSystem:
 		self.maxX = int(max_x)
 		self.minY = int(min_y)
 		self.maxY = int(max_y)
-		self.space = zeros((self.maxX-self.minX+1,self.maxY-self.minY+1))
-		self.generate_food()
+		self.space = ones((self.maxX-self.minX+1,self.maxY-self.minY+1))
+	def move(self,fsm):
+		#Move up, down, left, or right with equal probability
+		deltax = 0
+		deltay = 0
+		if(r.randint(0,1)):
+			if(r.random()>=0.5):
+				deltax = 1
+			else:
+				deltax = -1
+		else:
+			if(r.random()>=0.5):
+				deltay = 1
+			else:
+				deltay = -1
+		fsm.pos_x += deltax
+		fsm.pos_y += deltay
+		#Restrict movement to board
+		if(fsm.pos_x>constants.cs_maxX):
+			fsm.pos_x = constants.cs_maxX
+		if(fsm.pos_y>constants.cs_maxY):
+			fsm.pos_y = constants.cs_maxY
+		if(fsm.pos_x<constants.cs_minX):
+			fsm.pos_x = constants.cs_minX
+		if(fsm.pos_y<constants.cs_minY):
+			fsm.pos_y = constants.cs_minY
 	def food(self,x=0,y=0,val=0):
 		self.space[x,y] += val
 	def is_food(self,x=0,y=0):
@@ -27,4 +51,4 @@ class CoordinateSystem:
 			for y in range(self.minY,self.maxY+1,1):
 				i = x-self.minX
 				j = y-self.minY
-				self.food(i,j,randint(-1,1))
+				self.food(i,j,r.randint(-1,2))
