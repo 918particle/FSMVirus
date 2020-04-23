@@ -1,0 +1,5 @@
+\beamer@sectionintoc {1}{Summary}{2}{0}{1}
+\beamer@sectionintoc {2}{Finite State Machines}{4}{0}{2}
+\beamer@sectionintoc {3}{COVID-19 as an FSM}{8}{0}{3}
+\beamer@sectionintoc {4}{Results}{15}{0}{4}
+\beamer@sectionintoc {5}{Conclusion}{18}{0}{5}

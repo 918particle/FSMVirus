@@ -33,5 +33,5 @@ class Operate():
 			self.main_fsm_list.extend(self.new_fsm_list)
 		self.new_fsm_list.clear()
 		#Generate new food
-		if(self.turn_count<constants.N_food):
+		if(self.turn_count<constants.N_food or self.turn_count>constants.N_food2):
 			self.main_coordinate_system.generate_food()
