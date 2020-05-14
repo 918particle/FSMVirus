@@ -35,3 +35,6 @@ class Operate():
 		#Generate new food
 		if(self.turn_count<constants.N_food or self.turn_count>constants.N_food2):
 			self.main_coordinate_system.generate_food()
+		#Remove food from board
+		if(self.turn_count>constants.N_food and self.turn_count<constants.N_food2):
+			self.main_coordinate_system.remove_food()

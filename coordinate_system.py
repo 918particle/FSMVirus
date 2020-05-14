@@ -52,3 +52,9 @@ class CoordinateSystem:
 				i = x-self.minX
 				j = y-self.minY
 				self.food(i,j,r.randint(-1,2))
+	def remove_food(self):
+		for x in range(self.minX,self.maxX+1,1):
+			for y in range(self.minY,self.maxY+1,1):
+				i = x-self.minX
+				j = y-self.minY
+				self.food(i,j,r.randint(-2,1))
