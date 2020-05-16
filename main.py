@@ -1,12 +1,12 @@
-import coordinate_system
-import fsm
-import operate
+from coordinate_system import CoordinateSystem
+from fsm import FSM
+from operate import Operate
 import constants
 from numpy import sum
 
 def main():
 	#simulation setup phase
-	operator1 = operate.Operate(coordinate_system.CoordinateSystem(),[fsm.FSM(0,0)])
+	operator1 = Operate(CoordinateSystem(),[FSM(0,0)])
 	#Event loop
 	for i in range(constants.N_turns):
 		operator1.run()
