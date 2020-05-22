@@ -5,21 +5,22 @@ close all;
 %import the data set to which we are conforming
 conform_data = load('cdc_data.dat');
 %import the data set that must be conformed
-model_data = load('fsm_example.dat');
+model_data = load('average_data_nfood50_1000turns_100runs.dat');
 
 %Separate the data components
-conform_data_x = conform_data(:,1)-conform_data(1,1);
+conform_data_x = conform_data(:,1);
 conform_data_y = conform_data(:,2);
-model_data_x = model_data(:,1)-model_data(1,1);
+model_data_x = model_data(:,1);
 model_data_y = model_data(:,2);
 
 %Bin the data into x and y bins with errors
-N_bins_x = 15;
+N_bins_x = 40;
 bins = [0:1/N_bins_x:1-1/N_bins_x];
+bins = bins*max(conform_data_x);
 			
 %Regularize the data and model data times
-conform_data_x = conform_data_x/max(conform_data_x);
-model_data_x = model_data_x/max(model_data_x);
+%conform_data_x = conform_data_x/max(conform_data_x);
+%model_data_x = model_data_x/max(model_data_x);
 
 %Provide for binned conform and model data, with statistical errors
 conform_data_y_binned = [];
@@ -27,9 +28,9 @@ conform_data_y_binned_err = [];
 model_data_y_binned = [];
 
 %Space of scale parameters a_x and a_y
-a_x = [5:0.1:10.0];
-a_y = [15.0:0.1:20.0];
-chi_2_r = 1.0e7;
+a_x = [0.1:0.1:2];
+a_y = [10.0:0.5:50.0];
+least_squares = 1.0e9;
 a_x_best = 0.0;
 a_y_best = 0.0;
 
@@ -59,13 +60,12 @@ for ix = a_x
 		conform_data_y_binned_err = circshift(conform_data_y_binned_err,[0,-1]);
 		model_data_y_binned = circshift(model_data_y_binned,[0,-1]);
 
-		%Compute reduced chi-squared between model and data set.
-		chi_2_r_temp = mean( (conform_data_y_binned - model_data_y_binned).^2 ./ (conform_data_y_binned_err).^2 );
-		if(chi_2_r_temp < chi_2_r)
-			chi_2_r = chi_2_r_temp;
+		%Compute mean least_squares between model and data set.
+		least_squares_temp = mean( (conform_data_y_binned - model_data_y_binned).^2 );
+		if(least_squares_temp < least_squares)
+			least_squares = least_squares_temp;
 			a_x_best = ix;
 			a_y_best = iy;
-			[a_x_best a_y_best chi_2_r]
 		endif
 
 		conform_data_y_binned = [];
@@ -100,5 +100,6 @@ endfor
 
 figure(1);
 hold on;
-plot(bins,conform_data_y_binned,'color','blue');
+errorbar(bins,conform_data_y_binned,conform_data_y_binned_err);
 plot(bins,model_data_y_binned,'color','red');
+corr(conform_data_y_binned,model_data_y_binned)
