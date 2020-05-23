@@ -13,28 +13,28 @@ class CoordinateSystem:
 		self.maxX = int(max_x)
 		self.minY = int(min_y)
 		self.maxY = int(max_y)
-		self.space = ones((self.maxX-self.minX+1,self.maxY-self.minY+1))
+		self.space = ones((self.maxX,self.maxY))
 	def move(self,fsm):
 		#Move up, down, left, or right with equal probability
 		deltax = 0
 		deltay = 0
 		if(r.randint(0,1)):
-			if(r.random()>=0.5):
+			if(r.randint(0,1)):
 				deltax = 1
 			else:
 				deltax = -1
 		else:
-			if(r.random()>=0.5):
+			if(r.randint(0,1)):
 				deltay = 1
 			else:
 				deltay = -1
 		fsm.pos_x += deltax
 		fsm.pos_y += deltay
-		#Restrict movement to board
-		if(fsm.pos_x>constants.cs_maxX):
-			fsm.pos_x = constants.cs_maxX
-		if(fsm.pos_y>constants.cs_maxY):
-			fsm.pos_y = constants.cs_maxY
+		#Restrict movement to board...minimums typically 0
+		if(fsm.pos_x>=constants.cs_maxX):
+			fsm.pos_x = constants.cs_maxX-1
+		if(fsm.pos_y>=constants.cs_maxY):
+			fsm.pos_y = constants.cs_maxY-1
 		if(fsm.pos_x<constants.cs_minX):
 			fsm.pos_x = constants.cs_minX
 		if(fsm.pos_y<constants.cs_minY):
@@ -47,14 +47,10 @@ class CoordinateSystem:
 		else:
 			return '0'
 	def generate_food(self):
-		for x in range(self.minX,self.maxX+1,1):
-			for y in range(self.minY,self.maxY+1,1):
-				i = x-self.minX
-				j = y-self.minY
-				self.food(i,j,r.randint(-1,2))
+		for x in range(self.minX,self.maxX):
+			for y in range(self.minY,self.maxY):
+				self.food(x,y,r.randint(-1,2))
 	def remove_food(self):
-		for x in range(self.minX,self.maxX+1,1):
-			for y in range(self.minY,self.maxY+1,1):
-				i = x-self.minX
-				j = y-self.minY
-				self.food(i,j,r.randint(-2,1))
+		for x in range(self.minX,self.maxX):
+			for y in range(self.minY,self.maxY):
+				self.food(x,y,r.randint(-2,1))

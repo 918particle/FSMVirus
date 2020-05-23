@@ -3,9 +3,9 @@ home;
 close all;
 
 %import the data set to which we are conforming
-conform_data = load('cdc_data.dat');
+conform_data = load('who_usa_data.dat');
 %import the data set that must be conformed
-model_data = load('average_data_nfood50_1000turns_100runs.dat');
+model_data = load('average_data_nfood100_1000turns_100runs.dat');
 
 %Separate the data components
 conform_data_x = conform_data(:,1);
