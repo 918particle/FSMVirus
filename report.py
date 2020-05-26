@@ -32,7 +32,7 @@ class Report():
 			fout.close()
 
 	def reveal_virus(self,turn):
-		if(turn in self.time_points):
+		if(turn in self.time_points and self.output_flag):
 			fileString = self.output_title2+"_turn"+str(turn)+".dat"
 			fout = open(fileString,'w')
 			nx = self.main_operater.main_coordinate_system.space.shape[0]

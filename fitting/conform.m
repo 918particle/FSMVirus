@@ -3,9 +3,9 @@ home;
 close all;
 
 %import the data set to which we are conforming
-conform_data = load('who_usa_data.dat');
+conform_data = load('who_china_data.dat');
 %import the data set that must be conformed
-model_data = load('average_data_nfood100_1000turns_100runs.dat');
+model_data = load('May25_output_run0.dat');
 
 %Separate the data components
 conform_data_x = conform_data(:,1);
@@ -17,10 +17,6 @@ model_data_y = model_data(:,2);
 N_bins_x = 40;
 bins = [0:1/N_bins_x:1-1/N_bins_x];
 bins = bins*max(conform_data_x);
-			
-%Regularize the data and model data times
-%conform_data_x = conform_data_x/max(conform_data_x);
-%model_data_x = model_data_x/max(model_data_x);
 
 %Provide for binned conform and model data, with statistical errors
 conform_data_y_binned = [];
@@ -28,8 +24,8 @@ conform_data_y_binned_err = [];
 model_data_y_binned = [];
 
 %Space of scale parameters a_x and a_y
-a_x = [0.1:0.1:2];
-a_y = [10.0:0.5:50.0];
+a_x = [0.05:0.05:1];
+a_y = [1.0:0.1:3.0];
 least_squares = 1.0e9;
 a_x_best = 0.0;
 a_y_best = 0.0;
@@ -100,6 +96,6 @@ endfor
 
 figure(1);
 hold on;
-errorbar(bins,conform_data_y_binned,conform_data_y_binned_err);
-plot(bins,model_data_y_binned,'color','red');
+semilogy(bins,conform_data_y_binned);
+semilogy(bins,model_data_y_binned,'color','red');
 corr(conform_data_y_binned,model_data_y_binned)
