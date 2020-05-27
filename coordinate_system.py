@@ -41,6 +41,8 @@ class CoordinateSystem:
 			fsm.pos_y = constants.cs_minY
 	def food(self,x=0,y=0,val=0):
 		self.space[x,y] += val
+		if(self.space[x,y]<0):
+			self.space[x,y]=0
 	def is_food(self,x=0,y=0):
 		if(self.space[x,y]>0):
 			return '1'

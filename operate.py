@@ -34,13 +34,15 @@ class Operate():
 		if(len(self.new_fsm_list)>0):
 			self.main_fsm_list.extend(self.new_fsm_list)
 		self.new_fsm_list.clear()
-		#Generate new food
-		if(self.turn_count<constants.N_food or 
-			(self.turn_count>constants.N_food2 and self.turn_count<constants.N_food3)):
+		#Handle susceptibility
+		if(self.turn_count<constants.N_food):
 			self.main_coordinate_system.generate_food()
-		#Remove food from board
-		if((self.turn_count>constants.N_food and self.turn_count<constants.N_food2) or 
-			self.turn_count>constants.N_food3):
+		if(self.turn_count>constants.N_food and self.turn_count<constants.N_food2):
 			self.main_coordinate_system.remove_food()
+		if(self.turn_count>constants.N_food2 and self.turn_count<constants.N_food3):
+			self.main_coordinate_system.generate_food()
+		if(self.turn_count>constants.N_food4):
+			self.main_coordinate_system.remove_food()
+
 	def insert_fsm(self,x,y):
 		self.main_fsm_list.append(fsm.FSM(x,y))

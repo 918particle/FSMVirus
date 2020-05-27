@@ -5,7 +5,7 @@ close all;
 %import the data set to which we are conforming
 conform_data = load('who_china_data.dat');
 %import the data set that must be conformed
-model_data = load('May25_output_run0.dat');
+model_data = load('May26_output_100_280_290_460_wReinfect.dat');
 
 %Separate the data components
 conform_data_x = conform_data(:,1);
@@ -24,8 +24,8 @@ conform_data_y_binned_err = [];
 model_data_y_binned = [];
 
 %Space of scale parameters a_x and a_y
-a_x = [0.05:0.05:1];
-a_y = [1.0:0.1:3.0];
+a_x = [0.1:0.01:0.4];
+a_y = [1.0:0.05:3.0];
 least_squares = 1.0e9;
 a_x_best = 0.0;
 a_y_best = 0.0;

@@ -5,6 +5,7 @@ cs_minY = 0 #Minimum zero
 cs_maxY = 100
 #Numerical constants
 N_turns = 1000 #Total turns in the run
-N_food = 100 #Number of turns before food shuts off
-N_food2 = 235 #Second wave
-N_food3 = 285 #Second wave shut down
+N_food = 100 #Shut off food
+N_food2 = 280 #Turn on food
+N_food3 = 290 #No change
+N_food4 = 460 #Shut down
