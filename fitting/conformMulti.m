@@ -33,8 +33,8 @@ for z=[1:samp]
 	model_data_y_binned = [];
 
 	%Space of scale parameters a_x and a_y
-	a_x = [0.15:0.01:0.4];
-	a_y = [1.0:0.05:3.0];
+	a_x = [0.1:0.01:0.3];
+	a_y = [1.0:0.01:3.0];
 	least_squares = 1.0e9;
 	a_x_best = 0.0;
 	a_y_best = 0.0;
@@ -111,7 +111,7 @@ for z=[1:samp]
 	clear ix iy i least_squares_temp a_x a_y a_x_best a_y_best model_data_x_current model_data_y_current
 endfor
 
-%figure(1);
-%hold on;
-%semilogy(bins,conform_data_y_binned);
-%semilogy(bins,model_data_y_binned,'color','red');
+figure(1);
+hold on;
+semilogy(bins,conform_data_y_binned);
+semilogy(bins,model_data_y_binned,'color','red');
