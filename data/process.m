@@ -1,4 +1,4 @@
-title_base = "May21_output_200by200_1000_150_900_run";
+	title_base = "May21_output_200by200_1000_150_900_run";
 n_runs = 100;
 all_data = [];
 x_axis = [];
