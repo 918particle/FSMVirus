@@ -1,12 +1,14 @@
 clear;
 home;
 
-file_list = dir();
+data_dir = 'results_usa/';
+
+file_list = dir(data_dir);
 n = length(file_list);
 outbreaks = [];
 
 for i=[1:n]
-	this_file_name = file_list(i).name;
+	this_file_name = strcat(data_dir,file_list(i).name);
 	if(strfind(this_file_name,"output"))
 		temp_data = load(this_file_name);
 		if(temp_data(400,2)==0)

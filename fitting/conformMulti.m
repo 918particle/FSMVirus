@@ -4,7 +4,7 @@ close all;
 warning("off")
 
 %import the data set to which we are conforming
-conform_data = load('who_china_data.dat');
+conform_data = load('who_usa_data.dat');
 %import the data set that must be conformed...for now entitled outbreaks
 load('outbreaks.dat');
 
@@ -24,6 +24,8 @@ bins = [0:1/N_bins_x:1-1/N_bins_x];
 bins = bins*max(conform_data_x);
 
 for z=[1:samp]
+	display(z)
+	fflush(stdout)
 	model_data_x = transpose([1:n]);
 	model_data_y = outbreaks(:,z);
 
@@ -33,8 +35,8 @@ for z=[1:samp]
 	model_data_y_binned = [];
 
 	%Space of scale parameters a_x and a_y
-	a_x = [0.1:0.01:0.3];
-	a_y = [1.0:0.01:3.0];
+	a_x = [0.05:0.01:0.2];
+	a_y = [0.05:0.01:2.0];
 	least_squares = 1.0e9;
 	a_x_best = 0.0;
 	a_y_best = 0.0;

@@ -1,4 +1,4 @@
-	title_base = "May21_output_200by200_1000_150_900_run";
+title_base = "results_usa/Jun1_output_run";
 n_runs = 100;
 all_data = [];
 x_axis = [];
@@ -20,6 +20,6 @@ mean_data_plus = mean_data+std_data;
 
 figure(1)
 hold on;
-plot(x_axis,mean_data,'color','black','linewidth',3);
-plot(x_axis,mean_data_minus,'color','red','linewidth',3);
-plot(x_axis,mean_data_plus,'color','blue','linewidth',3);
+semilogy(x_axis,mean_data,'color','black','linewidth',3);
+semilogy(x_axis,mean_data_minus,'color','red','linewidth',3);
+semilogy(x_axis,mean_data_plus,'color','blue','linewidth',3);
