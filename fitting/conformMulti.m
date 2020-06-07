@@ -35,8 +35,8 @@ for z=[1:samp]
 	model_data_y_binned = [];
 
 	%Space of scale parameters a_x and a_y
-	a_x = [0.05:0.01:0.2];
-	a_y = [0.05:0.01:2.0];
+	a_x = [0.05:0.01:0.3];
+	a_y = [2.0:0.01:5.0];
 	least_squares = 1.0e9;
 	a_x_best = 0.0;
 	a_y_best = 0.0;

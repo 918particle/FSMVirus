@@ -1,7 +1,7 @@
 clear;
 home;
 
-data_dir = 'results_usa/';
+data_dir = 'results_usa_2/';
 
 file_list = dir(data_dir);
 n = length(file_list);

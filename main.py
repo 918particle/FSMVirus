@@ -20,7 +20,7 @@ def plan(fileoutName,virusPlotName,runNumber):
 
 def main():
 	for i in range(0,99):
-		p = Process(target=plan, args=('Jun1_output_run','virus_spatial',i))
+		p = Process(target=plan, args=('Jun5_output_run','virus_spatial',i))
 		p.start()
 		if(i % 8 ==0 and i != 0):
 			p.join()

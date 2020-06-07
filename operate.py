@@ -37,8 +37,8 @@ class Operate():
 		#Handle susceptibility
 		if(self.turn_count<constants.N_food):
 			self.main_coordinate_system.generate_food()
-		#if(self.turn_count>constants.N_food and self.turn_count<constants.N_food2):
-		#	self.main_coordinate_system.remove_food()
+		if(self.turn_count>constants.N_food and self.turn_count<constants.N_food2):
+			self.main_coordinate_system.remove_food()
 		#if(self.turn_count>constants.N_food2 and self.turn_count<constants.N_food3):
 		#	self.main_coordinate_system.generate_food()
 		#if(self.turn_count>constants.N_food4):

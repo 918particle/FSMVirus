@@ -1,0 +1,35 @@
+#Plan
+def plan(fileoutName,virusPlotName,runNumber):
+	fileTitle = fileoutName+str(runNumber)+".dat"
+	fileTitle2 = virusPlotName+str(runNumber)
+	operator = Operate(CoordinateSystem(),[FSM(50,50)])
+	reporter = Report(operator,fileTitle,fileTitle2,[0,0.2,0.4,0.6,0.8,1])
+	for i in range(constants.N_turns):
+		operator.run()
+		reporter.update()
+		reporter.reveal_virus(i)
+	reporter.output()
+
+#Constants
+#Space variables
+cs_minX = 0 #Minimum zero
+cs_maxX = 100
+cs_minY = 0 #Minimum zero
+cs_maxY = 100
+#Numerical constants
+N_turns = 1000 #Total turns in the run
+N_food = 200 #Shut off food
+N_food2 = 400 #Turn on food
+#N_food3 = 200 #No change
+#N_food4 = 1000 #Shut down
+
+#In operate.py, sucseptibility
+		#Handle susceptibility
+		if(self.turn_count<constants.N_food):
+			self.main_coordinate_system.generate_food()
+		if(self.turn_count>constants.N_food and self.turn_count<constants.N_food2):
+			self.main_coordinate_system.remove_food()
+		#if(self.turn_count>constants.N_food2 and self.turn_count<constants.N_food3):
+		#	self.main_coordinate_system.generate_food()
+		#if(self.turn_count>constants.N_food4):
+		#	self.main_coordinate_system.remove_food()
