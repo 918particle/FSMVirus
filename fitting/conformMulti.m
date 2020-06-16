@@ -4,7 +4,7 @@ close all;
 warning("off")
 
 %import the data set to which we are conforming
-conform_data = load('who_usa_data.dat');
+conform_data = load('cdc_data_2.dat');
 %import the data set that must be conformed...for now entitled outbreaks
 load('outbreaks.dat');
 
@@ -35,8 +35,8 @@ for z=[1:samp]
 	model_data_y_binned = [];
 
 	%Space of scale parameters a_x and a_y
-	a_x = [0.05:0.01:0.3];
-	a_y = [2.0:0.01:5.0];
+	a_x = [0.05:0.05:0.3];
+	a_y = [2.0:0.1:5.0];
 	least_squares = 1.0e9;
 	a_x_best = 0.0;
 	a_y_best = 0.0;
