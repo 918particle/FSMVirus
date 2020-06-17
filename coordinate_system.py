@@ -1,6 +1,7 @@
 from numpy import array,ones,zeros
 import random as r
 import constants
+import vaccine
 
 class CoordinateSystem:
 	def __init__(
@@ -14,10 +15,6 @@ class CoordinateSystem:
 		self.minY = int(min_y)
 		self.maxY = int(max_y)
 		self.space = ones((self.maxX,self.maxY))
-		self.vacc_x_min = 0
-		self.vacc_y_min = 0
-		self.vacc_x_max = 0
-		self.vacc_y_max = 0
 	def move(self,fsm):
 		#Move up, down, left, or right with equal probability
 		deltax = 0
@@ -47,19 +44,11 @@ class CoordinateSystem:
 		self.space[x,y] += val
 		if(self.space[x,y]<0):
 			self.space[x,y]=0
-	def is_food(self,x=0,y=0):
-		if(self.space[x,y]>0 and self.is_vaccinated(x,y)==False):
+	def is_food(self,x,y,vaccine):
+		if(self.space[x,y]>0 and vaccine.is_vaccinated(x,y)==False):
 			return '1'
 		else:
 			return '0'
-	def is_vaccinated(self,x=0,y=0):
-		if(self.vacc_x_min<=x and self.vacc_x_max>=x):
-			if(self.vacc_y_min<=y and self.vacc_y_max>=y):
-				return True
-			else:
-				return False
-		else:
-			return False
 	def generate_food(self):
 		for x in range(self.minX,self.maxX):
 			for y in range(self.minY,self.maxY):
@@ -68,8 +57,3 @@ class CoordinateSystem:
 		for x in range(self.minX,self.maxX):
 			for y in range(self.minY,self.maxY):
 				self.food(x,y,r.randint(-2,1))
-	def vaccinate_area(self,xmin,xmax,ymin,ymax):
-		self.vacc_x_min = xmin
-		self.vacc_y_min = ymin
-		self.vacc_x_max = xmax
-		self.vacc_y_max = ymax

@@ -3,17 +3,18 @@ import coordinate_system
 import constants
 
 class Operate():
-	def __init__(self,cs,fsm_list):
+	def __init__(self,cs,fsm_list,vaccine):
 		self.main_coordinate_system = cs
 		self.main_fsm_list = fsm_list
 		self.new_fsm_list = []
 		self.turn_count = 0
+		self.vaccine = vaccine
 	def run(self):
 		self.turn_count+=1
 		for current_fsm in self.main_fsm_list:
 			if(len(self.main_fsm_list)==0 and self.turn_count > constants.N_food):
 				break
-			current_fsm.act(self.main_coordinate_system.is_food(current_fsm.pos_x,current_fsm.pos_y))
+			current_fsm.act(self.main_coordinate_system.is_food(current_fsm.pos_x,current_fsm.pos_y,self.vaccine))
 			#Phase 1: movement
 			if(current_fsm.get_state() == '00'):
 				self.main_coordinate_system.move(current_fsm)
@@ -39,10 +40,6 @@ class Operate():
 			self.main_coordinate_system.generate_food()
 		if(self.turn_count>constants.N_food and self.turn_count<constants.N_food2):
 			self.main_coordinate_system.remove_food()
-		#if(self.turn_count>constants.N_food2 and self.turn_count<constants.N_food3):
-		#	self.main_coordinate_system.generate_food()
-		#if(self.turn_count>constants.N_food4):
-		#	self.main_coordinate_system.remove_food()
 
 	def insert_fsm(self,x,y):
 		self.main_fsm_list.append(fsm.FSM(x,y))
