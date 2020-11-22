@@ -1,4 +1,4 @@
-dataFile = open('nytimes_state_data.csv','r')
+dataFile = open('states.csv','r')
 theState = 'Oklahoma'
 stateData = []
 dates = []
@@ -9,7 +9,7 @@ for line in dataFile:
 		stateData.append(pieces[3])
 dataFile.close()
 
-saveFile = open('Oklahoma_data.dat','w')
+saveFile = open('Oklahoma_data_2.dat','w')
 for i in range(0,len(dates)):
 	ymd = dates[i].split('-')
 	time = 0
