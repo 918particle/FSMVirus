@@ -18,19 +18,19 @@ def plan(fileoutName,virusPlotName,runNumber):
 		y = randint(constants.cs_minY,constants.cs_maxY)
 		l.append((x,y))
 
-	operator = Operate(CoordinateSystem(),[FSM(50,50)],Vaccine(l))
+	operator = Operate(CoordinateSystem(),[FSM(49,49)],Vaccine(l))
 	reporter = Report(operator,fileTitle,fileTitle2,[0,0.1,0.2,0.3,0.4,0.5])
 
 	for i in range(constants.N_turns):
 		operator.run()
 		reporter.update()
-		reporter.reveal_virus(i)
+		#reporter.reveal_virus(i)
 
 	reporter.output()
 
 def main():
-	for i in range(0,100):
-		p = Process(target=plan, args=('Jun16_output_run_novacc_','virus_spatial_novacc_',i))
+	for i in range(0,4):
+		p = Process(target=plan, args=('Nov22_run_novacc_','virus_spatial_novacc_',i))
 		p.start()
 		if(i % 8 ==0 and i != 0):
 			p.join()
