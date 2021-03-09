@@ -44,8 +44,10 @@ class Operate():
 			self.main_coordinate_system.generate_food()
 		if(self.turn_count>=constants.N_food3 and self.turn_count<constants.N_food4):
 			self.main_coordinate_system.remove_food()
-		if(self.turn_count>=constants.N_food4):
+		if(self.turn_count>=constants.N_food4 and self.turn_count<constants.N_food5):
 			self.main_coordinate_system.generate_food()
+		if(self.turn_count>=constants.N_food5):
+			self.main_coordinate_system.remove_food()
 
 	def insert_fsm(self,x,y):
 		self.main_fsm_list.append(fsm.FSM(x,y))

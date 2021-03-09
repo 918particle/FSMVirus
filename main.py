@@ -29,8 +29,8 @@ def plan(fileoutName,virusPlotName,runNumber):
 	reporter.output()
 
 def main():
-	for i in range(0,4):
-		p = Process(target=plan, args=('Nov22_run_novacc_','virus_spatial_novacc_',i))
+	for i in range(300,400):
+		p = Process(target=plan, args=('March6_run_','virus_spatial_',i))
 		p.start()
 		if(i % 8 ==0 and i != 0):
 			p.join()

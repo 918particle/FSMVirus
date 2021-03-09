@@ -18,9 +18,8 @@ class Report():
 		self.virus_count.append(len(self.main_operater.main_fsm_list))
 		self.turn_count.append(self.main_operater.turn_count)
 		self.food_count.append(sum(sum(self.main_operater.main_coordinate_system.space)))
-		if(max(self.turn_count) == 100):
-			if(self.virus_count[-1]==0):
-				self.output_flag = False
+		if(max(self.turn_count) >= constants.N_food and self.virus_count[-1]==0):
+			self.output_flag = False
 
 	def output(self):
 		if(self.output_flag):
