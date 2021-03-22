@@ -1,6 +1,7 @@
 import fsm
 import coordinate_system
 import constants
+import random as r
 
 class Operate():
 	def __init__(self,cs,fsm_list,vaccine):
@@ -23,13 +24,15 @@ class Operate():
 			if(current_fsm.get_state() == '01'):
 				self.main_coordinate_system.food(current_fsm.pos_x,current_fsm.pos_y,-1)
 				continue
-			#Phase 3: reproduction
+			#Phase 3: reproduction:
 			if(current_fsm.get_state() == '10'):
-				self.new_fsm_list.append(fsm.FSM(current_fsm.pos_x,current_fsm.pos_y))
+				if(r.random() < 0.4):
+					self.new_fsm_list.append(fsm.FSM(current_fsm.pos_x,current_fsm.pos_y))
 				continue
 			#Phase 4: dying FSMs removed
 			if(current_fsm.get_state() == '11'):
-				self.main_fsm_list.remove(current_fsm)
+				if(current_fsm.life <= 0):
+					self.main_fsm_list.remove(current_fsm)
 				continue
 		#Add new FSMs to main list
 		if(len(self.new_fsm_list)>0):

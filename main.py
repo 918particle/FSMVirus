@@ -29,10 +29,10 @@ def plan(fileoutName,virusPlotName,runNumber):
 	reporter.output()
 
 def main():
-	for i in range(300,400):
-		p = Process(target=plan, args=('March6_run_','virus_spatial_',i))
+	for i in range(0,10):
+		p = Process(target=plan, args=('Repr2_run_','virus_spatial_',i))
 		p.start()
-		if(i % 8 ==0 and i != 0):
+		if(i % 8 == 0 and i != 0):
 			p.join()
 
 if __name__ == "__main__":
