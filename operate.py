@@ -26,13 +26,12 @@ class Operate():
 				continue
 			#Phase 3: reproduction:
 			if(current_fsm.get_state() == '10'):
-				if(r.random() < 0.4):
-					self.new_fsm_list.append(fsm.FSM(current_fsm.pos_x,current_fsm.pos_y))
+				self.new_fsm_list.append(fsm.FSM(current_fsm.pos_x,current_fsm.pos_y))
+				self.new_fsm_list.append(fsm.FSM(current_fsm.pos_x,current_fsm.pos_y))
 				continue
 			#Phase 4: dying FSMs removed
 			if(current_fsm.get_state() == '11'):
-				if(current_fsm.life <= 0):
-					self.main_fsm_list.remove(current_fsm)
+				self.main_fsm_list.remove(current_fsm)
 				continue
 		#Add new FSMs to main list
 		if(len(self.new_fsm_list)>0):
@@ -51,6 +50,12 @@ class Operate():
 			self.main_coordinate_system.generate_food()
 		if(self.turn_count>=constants.N_food5):
 			self.main_coordinate_system.remove_food()
+
+		#Handle new outbreaks
+		if(self.turn_count == constants.N_food2):
+			self.main_fsm_list.append(fsm.FSM(99,99))
+		if(self.turn_count == constants.N_food4):
+			self.main_fsm_list.append(fsm.FSM(99,0))
 
 	def insert_fsm(self,x,y):
 		self.main_fsm_list.append(fsm.FSM(x,y))

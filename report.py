@@ -11,27 +11,23 @@ class Report():
 		self.virus_count = []
 		self.output_title = title
 		self.output_title2 = title2
-		self.output_flag = True
-		self.time_points = [constants.N_turns*i for i in times]
+		self.time_points = [int(constants.N_turns*i) for i in times]
 
 	def update(self):
 		self.virus_count.append(len(self.main_operater.main_fsm_list))
 		self.turn_count.append(self.main_operater.turn_count)
 		self.food_count.append(sum(sum(self.main_operater.main_coordinate_system.space)))
-		if(max(self.turn_count) >= constants.N_food and self.virus_count[-1]==0):
-			self.output_flag = False
 
 	def output(self):
-		if(self.output_flag):
-			fout = open(self.output_title,'w')
-			n = max(self.turn_count)
-			for i in range(0,n):
-				output_string = str(self.turn_count[i])+" "+str(self.virus_count[i])+" "+str(self.food_count[i])+"\n"
-				fout.write(output_string)
-			fout.close()
+		fout = open(self.output_title,'w')
+		n = max(self.turn_count)
+		for i in range(0,n):
+			output_string = str(self.turn_count[i])+" "+str(self.virus_count[i])+" "+str(self.food_count[i])+"\n"
+			fout.write(output_string)
+		fout.close()
 
 	def reveal_virus(self,turn):
-		if(turn in self.time_points and self.output_flag):
+		if(turn in self.time_points):
 			fileString = self.output_title2+"_turn"+str(turn)+".dat"
 			fout = open(fileString,'w')
 			nx = self.main_operater.main_coordinate_system.space.shape[0]

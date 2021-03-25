@@ -8,7 +8,6 @@ class FSM:
 		self.current_output = '1'
 		self.pos_x = x
 		self.pos_y = y
-		self.life = 14
 	def act(self,input):
 		if(input == '0' and self.current_state == '00'):
 			self.current_state = '11'
@@ -31,7 +30,6 @@ class FSM:
 		elif (input == '0' and self.current_state == '11'):
 			self.current_state = '11'
 			self.current_output = '0'
-			self.life -= 1
 		elif (input == '1' and self.current_state == '11'):
 			self.current_state = '01'
 			self.current_output = '1'
