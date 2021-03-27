@@ -10,4 +10,4 @@ N_food2 = 90
 N_food3 = 130
 N_food4 = 200
 N_food5 = 275
-N_vacc = 0
+N_vacc = 1
