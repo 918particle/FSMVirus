@@ -9,8 +9,8 @@ from random import randint
 
 def plan(fileoutName,virusPlotName,runNumber):
 
-	fileTitle = fileoutName+str(runNumber)+".dat"
-	fileTitle2 = virusPlotName+str(runNumber)
+	fileT = fileoutName+str(runNumber)+".dat"
+	fileT2 = virusPlotName+str(runNumber)
 
 	l = []
 	for i in range(0,constants.N_vacc):
@@ -18,20 +18,20 @@ def plan(fileoutName,virusPlotName,runNumber):
 		y = randint(constants.cs_minY,constants.cs_maxY)
 		l.append((x,y))
 
-	operator = Operate(CoordinateSystem(),[FSM(25,25)],Vaccine(l))
-	reporter = Report(operator,fileTitle,fileTitle2,[0,0.95])
+	operator = Operate(CoordinateSystem(),[FSM(25,25), FSM(75,25)],Vaccine(l))
+	reporter = Report(operator,fileT,fileT2,[0.33,0.42,0.5,0.58,0.67])
 
 	for i in range(constants.N_turns):
 		operator.run()
 		reporter.update()
-		#reporter.reveal_virus(i)
+		reporter.reveal_virus(i)
 
 	reporter.output()
 
 def main():
 	n_cores = 48
 	for i in range(100):
-		p = Process(target=plan, args=('Feb9_run_vacc_','virus_spatial_',i))
+		p = Process(target=plan, args=('Feb9_run_','virus_spatial_',i))
 		p.start()
 		if(i % n_cores == 0 and i != 0):
 			p.join()

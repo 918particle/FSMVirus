@@ -26,9 +26,9 @@ days = transpose([1:length(fsm_data)]);
 
 figure(1,'position',[0,0,1000,500]);
 hold on;
-plot(days,fsm_data)
-plot(days,fsm_data_vacc)
-axis([0 350 0 10000])
+plot(days,fsm_data,'linewidth',5)
+%plot(days,fsm_data_vacc)
+axis([0 600 0 20000])
 xlabel('Days since Outbreak','fontsize',24);
 ylabel('New FSMs','fontsize',24);
 set(gca(),'fontsize',24);
