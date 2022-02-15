@@ -24,13 +24,15 @@ endfor
 
 days = transpose([1:length(fsm_data)]);
 
-figure(1,'position',[0,0,1000,500]);
+figure(1);
 hold on;
 plot(days,fsm_data,'linewidth',5)
 %plot(days,fsm_data_vacc)
-axis([0 600 0 20000])
-xlabel('Days since Outbreak','fontsize',24);
+axis([0 200 0 800])
+xlabel('Turns since Outbreak','fontsize',24);
 ylabel('New FSMs','fontsize',24);
 set(gca(),'fontsize',24);
 grid on;
 box on;
+
+print('Feb14_plot2.pdf','-dpdf')

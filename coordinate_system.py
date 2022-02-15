@@ -14,7 +14,7 @@ class CoordinateSystem:
 		self.maxX = int(max_x)
 		self.minY = int(min_y)
 		self.maxY = int(max_y)
-		self.space = ones((self.maxX,self.maxY))
+		self.space = ones((self.maxX,self.maxY))*constants.N_p
 	def move(self,fsm):
 		#Move up, down, left, or right with equal probability
 		deltax = 0

@@ -3,9 +3,9 @@ clc
 close all
 
 k = 99;
-t = 402;
+t = 198;
 n = 100;
-m = 50;
+m = 2;
 fsm_data = zeros(n,m);
 fsm_data_vacc = fsm_data;
 
@@ -18,9 +18,10 @@ for i=0:k
 	endif
 endfor
 
-figure(1,'position',[0,0,1000,500]);
+figure(1);
 hold on;
 image(fsm_data)
+caxis([0 0.01])
 h = colorbar();
 colormap('jet')
 axis([1 m 1 n])

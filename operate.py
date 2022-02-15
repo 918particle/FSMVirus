@@ -36,9 +36,9 @@ class Operate():
 			self.main_fsm_list.extend(self.new_fsm_list)
 		self.new_fsm_list.clear()
 		#Handle susceptibility
-		if(self.turn_count<constants.N_food):
+		if(self.turn_count<constants.N_food and constants.N_p == 1):
 			self.main_coordinate_system.generate_food()
-		if(self.turn_count>=constants.N_food):
+		if(self.turn_count>=constants.N_food and constants.N_p == 1):
 			self.main_coordinate_system.remove_food()
 
 	def insert_fsm(self,x,y):
