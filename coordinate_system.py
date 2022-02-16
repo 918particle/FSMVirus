@@ -1,20 +1,19 @@
-from numpy import array,ones,zeros
 import random as r
 import constants
-import vaccine
+import food
+from food import Food
 
 class CoordinateSystem:
-	def __init__(
-		self,
-		min_x=constants.cs_minX,
-		max_x=constants.cs_maxX,
-		min_y=constants.cs_minY,
-		max_y=constants.cs_maxY):
-		self.minX = int(min_x)
+	def __init__(self,max_x=constants.cs_maxX,max_y=constants.cs_maxY):
 		self.maxX = int(max_x)
-		self.minY = int(min_y)
 		self.maxY = int(max_y)
-		self.space = ones((self.maxX,self.maxY))*constants.N_p
+		self.space = []
+		for i in range(self.maxX):
+			current_row = []
+			for j in range(self.maxY):
+				current_row.append([])
+			self.space.append(current_row)
+
 	def move(self,fsm):
 		#Move up, down, left, or right with equal probability
 		deltax = 0
@@ -32,28 +31,36 @@ class CoordinateSystem:
 		fsm.pos_x += deltax
 		fsm.pos_y += deltay
 		#Restrict movement to board...minimums typically 0
-		if(fsm.pos_x>=constants.cs_maxX):
-			fsm.pos_x = constants.cs_maxX-1
-		if(fsm.pos_y>=constants.cs_maxY):
-			fsm.pos_y = constants.cs_maxY-1
-		if(fsm.pos_x<constants.cs_minX):
-			fsm.pos_x = constants.cs_minX
-		if(fsm.pos_y<constants.cs_minY):
-			fsm.pos_y = constants.cs_minY
-	def food(self,x=0,y=0,val=0):
-		self.space[x,y] += val
-		if(self.space[x,y]<0):
-			self.space[x,y]=0
-	def is_food(self,x,y,vaccine):
-		if(self.space[x,y]>0 and vaccine.is_vaccinated(x,y)==False):
-			return '1'
-		else:
-			return '0'
+		if(fsm.pos_x>=self.maxX):
+			fsm.pos_x = self.maxX-1
+		if(fsm.pos_y>=self.maxY):
+			fsm.pos_y = self.maxY-1
+		if(fsm.pos_x<0):
+			fsm.pos_x = 0
+		if(fsm.pos_y<0):
+			fsm.pos_y = 0
+	def is_food(self,x,y):
+		if(self.space[x][y]):
+			n = len(self.space[x][y])
+			for i in range(n):
+				current_food = self.space[x][y][i]
+				if(current_food.get_state() == '1' and not current_food.is_vaccinated()):
+					return True
+			return False
+	def feed(self,x,y):
+		n = len(self.space[x][y])
+		i = 0
+		while self.space[x][y][i].is_vaccinated or self.space[x][y][i].get_state == "0" :
+			++i
+		self.space[x][y][i].toggle_state()
 	def generate_food(self):
-		for x in range(self.minX,self.maxX):
-			for y in range(self.minY,self.maxY):
-				self.food(x,y,r.randint(-1,2))
-	def remove_food(self):
-		for x in range(self.minX,self.maxX):
-			for y in range(self.minY,self.maxY):
-				self.food(x,y,r.randint(-2,1))
+		for x in range(self.maxX):
+			for y in range(self.maxY):
+				for k in range(constants.N_p):
+					self.space[x][y].append(Food(x,y))
+	def move_food(self):
+		for i in range(self.maxX):
+			for j in range(self.maxY):
+				n = len(self.space[i][j])
+				for k in range(n):
+					self.move(self.space[i][j][k])
