@@ -24,7 +24,7 @@ def plan(fileoutName,virusPlotName,runNumber):
 	for i in range(constants.N_turns):
 		operator.run()
 		reporter.update()
-		#reporter.reveal_virus(i)
+		reporter.reveal_virus(i)
 
 	reporter.output()
 
