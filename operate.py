@@ -12,8 +12,6 @@ class Operate():
 	def run(self):
 		self.turn_count+=1
 		for current_fsm in self.main_fsm_list:
-			if(self.main_fsm_list):
-				break
 			current_fsm.act(self.main_coordinate_system.is_food(current_fsm.pos_x,current_fsm.pos_y))
 			#Phase 1: movement
 			if(current_fsm.get_state() == '00'):
@@ -37,6 +35,9 @@ class Operate():
 		self.new_fsm_list.clear()
 		#Food movement
 		self.main_coordinate_system.move_food()
+		#Vaccination
+		if(self.turn_count > constants.N_vacc):
+			self.main_coordinate_system.vaccinate_population()
 
 	def insert_fsm(self,x,y):
 		self.main_fsm_list.append(fsm.FSM(x,y))

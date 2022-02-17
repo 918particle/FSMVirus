@@ -31,28 +31,30 @@ class CoordinateSystem:
 		fsm.pos_x += deltax
 		fsm.pos_y += deltay
 		#Restrict movement to board...minimums typically 0
-		if(fsm.pos_x>=self.maxX):
+		if(fsm.pos_x == self.maxX):
 			fsm.pos_x = self.maxX-1
-		if(fsm.pos_y>=self.maxY):
+		if(fsm.pos_y == self.maxY):
 			fsm.pos_y = self.maxY-1
 		if(fsm.pos_x<0):
 			fsm.pos_x = 0
 		if(fsm.pos_y<0):
 			fsm.pos_y = 0
+		return [fsm.pos_x,fsm.pos_y]
 	def is_food(self,x,y):
 		if(self.space[x][y]):
 			n = len(self.space[x][y])
 			for i in range(n):
 				current_food = self.space[x][y][i]
 				if(current_food.get_state() == '1' and not current_food.is_vaccinated()):
-					return True
-			return False
+					return '1'
+			return '0'
 	def feed(self,x,y):
 		n = len(self.space[x][y])
-		i = 0
-		while self.space[x][y][i].is_vaccinated or self.space[x][y][i].get_state == "0" :
-			++i
-		self.space[x][y][i].toggle_state()
+		for i in range(n):
+			current_food = self.space[x][y][i]
+			if(current_food.get_state() == '1' and not current_food.is_vaccinated()):
+				self.space[x][y][i].toggle_state()
+				break
 	def generate_food(self):
 		for x in range(self.maxX):
 			for y in range(self.maxY):
@@ -61,6 +63,16 @@ class CoordinateSystem:
 	def move_food(self):
 		for i in range(self.maxX):
 			for j in range(self.maxY):
+				k = 0
+				while k < len(self.space[i][j]):
+					new = self.move(self.space[i][j][k])
+					if(new[0] != i or new[1] != j):
+						self.space[new[0]][new[1]].append(self.space[i][j][k])
+						self.space[i][j].pop(k)
+					k+=1
+	def vaccinate_population(self):
+		for i in range(self.maxX):
+			for j in range(self.maxY):
 				n = len(self.space[i][j])
 				for k in range(n):
-					self.move(self.space[i][j][k])
+					self.space[i][j][k].vaccinate()
