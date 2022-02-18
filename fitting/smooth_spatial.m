@@ -3,10 +3,10 @@ clc
 close all
 
 k = 99;
-t = 210;
+t = 475;
 
-n = 100;
-m = 100;
+n = 50;
+m = 50;
 
 fsm_data = zeros(n,m);
 fsm_data_vacc = fsm_data;

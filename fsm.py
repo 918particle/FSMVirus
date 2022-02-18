@@ -3,11 +3,12 @@
 #Outputs: 0 - dead, 1 - alive
 
 class FSM:
-	def __init__(self,x=0,y=0):
+	def __init__(self,x=0,y=0,t=0):
 		self.current_state = '00'
 		self.current_output = '1'
 		self.pos_x = x
 		self.pos_y = y
+		self.t = t
 	def act(self,input):
 		if(input == '0' and self.current_state == '00'):
 			self.current_state = '11'
