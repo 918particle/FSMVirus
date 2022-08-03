@@ -23,8 +23,8 @@ def plan(fileoutName,virusPlotName,runNumber):
 	reporter.output()
 
 def main():
-	n_cores = 48
-	for i in range(48):
+	n_cores = 6
+	for i in range(10):
 		p = Process(target=plan, args=('Feb17_run_','virus_spatial_',i))
 		p.start()
 		if(i % n_cores == 0 and i != 0):
